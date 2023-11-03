@@ -8,6 +8,7 @@ import pyfirmata
 import time
 import inspect
 import random as rand
+
 class Principal(QMainWindow, Ui_PrincipalSimon):
     def __init__(self, *parent, **flags) -> None:
         super().__init__(*parent, **flags)
@@ -89,7 +90,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not hasattr(inspect, 'getargspec'):
             inspect.getargspec = inspect.getfullargspec
 
-        board = pyfirmata.Arduino('COM4')
+        board = pyfirmata.Arduino('COM5')
 
         it = pyfirmata.util.Iterator(board)
         it.start()
@@ -101,7 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         duracionNotas_2 = [3000, 7000, 3000, 5000, 3000, 2000, 9000, 2000]
 
         '''Botones'''
-        bt1 = board.get_pin('d:10:i' )
+        bt1 = board.get_pin('d:2:i' )
         bt2 = board.get_pin('d:3:i' )
         bt3 = board.get_pin('d:4:i' )
         bt4 = board.get_pin('d:5:i' )
@@ -113,7 +114,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         amarillo= board.get_pin('d:9:o')
 
         '''Buzzer y melodias'''
-        buzzer = board.get_pin('d:11:p' )
+        buzzer = board.get_pin('d:10:p' )
 
         def pusheo():
             buzzer.write(1)
@@ -261,10 +262,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         error()
                         exit()
             paso_nivel()
-
-
-
-    
+ 
 
 class Instrucciones(QMainWindow, Ui_Dialog):
     def __init__(self, *parent, **flags) -> None:
