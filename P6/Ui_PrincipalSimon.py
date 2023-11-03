@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\sergi\OneDrive\Documentos\UPIITA\4 Semestre\Programacion Avanzada\Practica6\PrincipalSimon.ui'
+# Form implementation generated from reading ui file 'c:\Users\aleva\OneDrive - Instituto Politecnico Nacional\Desktop\Documentos\Programming team\PA_team\P6\PrincipalSimon.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -14,7 +14,7 @@ class Ui_PrincipalSimon(object):
         PrincipalSimon.setObjectName("PrincipalSimon")
         PrincipalSimon.resize(650, 536)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\logo.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\logo.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         PrincipalSimon.setWindowIcon(icon)
         PrincipalSimon.setStyleSheet("background-color: rgb(25, 25, 25);")
         self.centralwidget = QtWidgets.QWidget(parent=PrincipalSimon)
@@ -40,7 +40,7 @@ class Ui_PrincipalSimon(object):
         self.label.setGeometry(QtCore.QRect(10, 40, 631, 221))
         self.label.setStyleSheet("border-image: url(:/simonsays.png);")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\simonsays.png"))
+        self.label.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\simonsays.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         PrincipalSimon.setCentralWidget(self.centralwidget)

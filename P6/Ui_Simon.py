@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\sergi\OneDrive\Documentos\UPIITA\4 Semestre\Programacion Avanzada\Practica6\Simon.ui'
+# Form implementation generated from reading ui file 'c:\Users\aleva\OneDrive - Instituto Politecnico Nacional\Desktop\Documentos\Programming team\PA_team\P6\Simon.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(818, 600)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\logo.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\logo.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("background-color: rgb(25, 25, 25);")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
         self.Apagada.setGeometry(QtCore.QRect(160, 60, 511, 441))
         self.Apagada.setStyleSheet("border-image: url(:/simon/OneDrive/Documentos/UPIITA/4 Semestre/Programacion Avanzada/Practica6/SIMONtodasapagadas.png);")
         self.Apagada.setText("")
-        self.Apagada.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\SIMONtodasapagadas.png"))
+        self.Apagada.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\SIMONtodasapagadas.png"))
         self.Apagada.setScaledContents(True)
         self.Apagada.setObjectName("Apagada")
         self.Rojobtn = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.Amarillo.setGeometry(QtCore.QRect(160, 60, 511, 441))
         self.Amarillo.setStyleSheet("border-image: url(:/simon/OneDrive/Documentos/UPIITA/4 Semestre/Programacion Avanzada/Practica6/simonAmarilloP.png);")
         self.Amarillo.setText("")
-        self.Amarillo.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\simonAmarilloP.png"))
+        self.Amarillo.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\simonAmarilloP.png"))
         self.Amarillo.setScaledContents(True)
         self.Amarillo.setObjectName("Amarillo")
         self.Verdebtn = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
         self.Rojo.setGeometry(QtCore.QRect(160, 60, 511, 441))
         self.Rojo.setStyleSheet("border-image: url(:/simon/OneDrive/Documentos/UPIITA/4 Semestre/Programacion Avanzada/Practica6/simonsinfondo.png);")
         self.Rojo.setText("")
-        self.Rojo.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\simonRojoP.png"))
+        self.Rojo.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\simonRojoP.png"))
         self.Rojo.setScaledContents(True)
         self.Rojo.setObjectName("Rojo")
         self.progressBar = QtWidgets.QProgressBar(parent=self.centralwidget)
@@ -66,14 +66,14 @@ class Ui_MainWindow(object):
         self.Azul.setGeometry(QtCore.QRect(160, 60, 511, 441))
         self.Azul.setStyleSheet("border-image: url(:/simon/OneDrive/Documentos/UPIITA/4 Semestre/Programacion Avanzada/Practica6/simonAzulP.png);")
         self.Azul.setText("")
-        self.Azul.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\simonAzulP.png"))
+        self.Azul.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\simonAzulP.png"))
         self.Azul.setScaledContents(True)
         self.Azul.setObjectName("Azul")
         self.Verde = QtWidgets.QLabel(parent=self.centralwidget)
         self.Verde.setGeometry(QtCore.QRect(160, 60, 511, 441))
         self.Verde.setStyleSheet("border-image: url(:/simon/OneDrive/Documentos/UPIITA/4 Semestre/Programacion Avanzada/Practica6/simonverdeP.png);")
         self.Verde.setText("")
-        self.Verde.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica6\\simonverdeP.png"))
+        self.Verde.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\Programming team\\PA_team\\P6\\simonverdeP.png"))
         self.Verde.setScaledContents(True)
         self.Verde.setObjectName("Verde")
         self.Amarillobtn = QtWidgets.QPushButton(parent=self.centralwidget)
