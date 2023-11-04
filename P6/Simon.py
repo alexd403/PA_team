@@ -63,7 +63,9 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
         
         '''Reinicio del juego'''
         self.simongame_thread.finished.connect(self.game_finished)  #Conexion con el final del juego
-     
+
+        '''Signals'''
+        
 
     def rojo(self):
         print('ROJO')
@@ -151,7 +153,7 @@ class SimonGameThread(QThread):
             """
         super().__init__()
         self.main_window = main_window_instance
-        
+    '''Implementacion de signals'''    
     signal_azul = pyqtSignal()
     signal_rojo = pyqtSignal()
     signal_verde = pyqtSignal()
@@ -163,13 +165,16 @@ class SimonGameThread(QThread):
         
         if x == 6:
             return self.signal_azul.emit()
+        
         elif x == 7:
             return self.signal_rojo.emit()
-        elif x == 8:
-            
+        
+        elif x == 8: 
             return self.signal_verde.emit()
+        
         elif x == 9:
             return self.signal_amarillo.emit()
+        
         elif x == 0:
             return self.signal_apagado.emit()
         
@@ -299,7 +304,7 @@ class SimonGameThread(QThread):
                         boton3= bt3.read()
                         boton4= bt4.read()
                             
-                        if boton1 == 1:
+                        if boton1 == 1 :
                             pusheo()
                             print('bton 1')
                             azul.write(1)
