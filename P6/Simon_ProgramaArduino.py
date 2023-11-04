@@ -6,7 +6,7 @@ import random as rand
 if not hasattr(inspect, 'getargspec'):
     inspect.getargspec = inspect.getfullargspec
 
-board = pyfirmata.Arduino('COM6')
+board = pyfirmata.Arduino('COM5')
 
 it = pyfirmata.util.Iterator(board)
 it.start()
