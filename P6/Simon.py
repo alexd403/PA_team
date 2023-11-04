@@ -79,12 +79,10 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
         
     
     def azul(self):
-        print('Boton azul en pantalla')
         for Qlabel in window.findChildren(QWidget):
             if Qlabel is not self.Azul:
                 Qlabel.lower()
         self.Azul.raise_()
-        print('fin')
 
 
     def verde(self):
@@ -185,7 +183,7 @@ class JuegoSimon(QThread):
     final_programa = pyqtSignal()  # Señal que indica el final del juego
     
     
-    def arranque_juego(self):
+    def run(self):
         
         if not hasattr(inspect, 'getargspec'):
             inspect.getargspec = inspect.getfullargspec
@@ -301,6 +299,8 @@ class JuegoSimon(QThread):
                 time.sleep(1)
                 board.digital[i].write(0)
                 self.signals(0)
+                time.sleep(1/2)
+                
             print(secuencia)
 
 
@@ -318,16 +318,19 @@ class JuegoSimon(QThread):
                 while True:
                             
                     while True:
+                        '''Lectura de los botones fisicos'''
                         boton1= bt1.read()
                         boton2= bt2.read()
                         boton3= bt3.read()
                         boton4= bt4.read()
-                            
+                        '''En cada if manda a llamar ciertas funcion y con las variables de apoyo
+                        se puede lograr el funcionamiento del programa.
+                        '''
                         if boton1 == 1 :
                             pusheo()
                             azul.write(1)
                             self.signals(6)
-                            time.sleep(1/2)
+                            time.sleep(1/3)
                             azul.write(0)
                             self.signals(0)
                             estado=6
@@ -339,7 +342,7 @@ class JuegoSimon(QThread):
                             print('bton 2')
                             rojo.write(1)
                             self.signals(7)
-                            time.sleep(1)
+                            time.sleep(1/3)
                             rojo.write(0)
                             self.signals(0)
                             estado=7
@@ -352,7 +355,7 @@ class JuegoSimon(QThread):
                             print('bton 3')
                             verde.write(1)
                             self.signals(8)
-                            time.sleep(1)
+                            time.sleep(1/3)
                             verde.write(0)
                             self.signals(0)
                             estado=8
@@ -365,7 +368,7 @@ class JuegoSimon(QThread):
                             print('bton 4')
                             amarillo.write(1)
                             self.signals(9)
-                            time.sleep(1)
+                            time.sleep(1/3)
                             amarillo.write(0)
                             self.signals(0)
                             estado=9
