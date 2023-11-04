@@ -25,7 +25,6 @@ class Principal(QMainWindow, Ui_PrincipalSimon):
 
         self.pushButton.clicked.connect(self.jugar)
         self.pushButton_2.clicked.connect(self.instrucciones)
-        #self.simongame_thread = SimonGameThread()  # Instancia del hilo del juego
         
     def jugar(self):
         self.ventana.show()
@@ -47,33 +46,29 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
         self.Apagarbtn.clicked.connect(self.apagado)
         self.perderbtn.clicked.connect(self.mensage)
         self.Regresarbtn.clicked.connect(self.regresar)
-        self.iniciobtn.clicked.connect(self.start_game)
-        self.Rojobtn.clicked.connect(self.rojo)
-        self.Amarillobtn.clicked.connect(self.amarillo)
+        self.iniciobtn.clicked.connect(self.inicio_juego)
         
-        '''Conexion de el hilo SimonGameThread'''
-        self.simongame_thread=SimonGameThread(self) #Instancia
+        '''Conexion de el hilo JuegoSimon'''
+        self.juegosimon_hilo=JuegoSimon(self) #Instancia
         
         '''Implementacion de slots para la comunicacion con el hilo externo'''
-        self.simongame_thread.signal_azul.connect(self.azul)
-        self.simongame_thread.signal_rojo.connect(self.rojo)
-        self.simongame_thread.signal_verde.connect(self.verde)
-        self.simongame_thread.signal_amarillo.connect(self.amarillo)
-        self.simongame_thread.signal_apagado.connect(self.apagado)
+        self.juegosimon_hilo.signal_azul.connect(self.azul)
+        self.juegosimon_hilo.signal_rojo.connect(self.rojo)
+        self.juegosimon_hilo.signal_verde.connect(self.verde)
+        self.juegosimon_hilo.signal_amarillo.connect(self.amarillo)
+        self.juegosimon_hilo.signal_apagado.connect(self.apagado)
         
-        '''Reinicio del juego'''
-        self.simongame_thread.finished.connect(self.game_finished)  #Conexion con el final del juego
+        '''Final del juego asociado al metodo final_juego'''
+        self.juegosimon_hilo.final_programa.connect(self.final_juego)  #Conexion con el final del juego
 
-        '''Signals'''
+      
         
 
     def rojo(self):
-        print('ROJO')
         for Qlabel in self.findChildren(QWidget):
             if Qlabel is not self.Rojo:
                 Qlabel.lower()
         self.Rojo.raise_()
-        print('Ya paso lo feo')
         
 
     def amarillo(self):
@@ -121,26 +116,26 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
     def regresar(self):
         window.show()
         self.close()
-        
     
-    def clickbtn(self):
-        print("Esto simula el pulsado")
-        self.Rojobtn.click()
-        print("Fin del pusheo")
         
-        
-    def start_game(self):
-        self.simongame_thread.start()  # Iniciar el hilo del juego
+    def inicio_juego(self):
+        """Inica el hilo secundario (JUEGO)"""
+        self.juegosimon_hilo.start()  # Iniciar el hilo del juego
     
     
-    def game_finished(self):
-        print("El juego ha terminado")  # Lógica después de que el juego ha finalizado
+    def final_juego(self):
+        """Indica el final del juego mostrando en pantalla el final del juego
+        """
+        print("El juego ha terminado, lo siento")  # Mensaje después de que el juego ha finalizado
+        '''Termina el juego y cierra la insterfaz'''
+        exit()
+        
 
-class SimonGameThread(QThread):
-    """Clase que establece un nuevo en la GUI (Principal)
+class JuegoSimon(QThread):
+    """Clase que establece un nuevo hilo en la GUI (Principal)
 
     Args:
-        QThread (Funcion): Creacion del hilo
+        QThread (Funcion): Creacion del hilo junto a la comunicacion
     """
     
     
@@ -153,16 +148,24 @@ class SimonGameThread(QThread):
             """
         super().__init__()
         self.main_window = main_window_instance
-    '''Implementacion de signals'''    
+        
+    '''Inicilizar signals'''    
     signal_azul = pyqtSignal()
     signal_rojo = pyqtSignal()
     signal_verde = pyqtSignal()
     signal_amarillo = pyqtSignal()
     signal_apagado=pyqtSignal()
         
-    '''Implementacion de signals'''
+    
     def signals(self, x):
-        
+        """Emecion de signal desde la clase JuegoSimon
+
+        Args:
+            x (int): Pin correspondiente a la conexion fisica de leds
+
+        Returns:
+            signal: returna una emicion de la signal correspondiente a cada pin
+        """
         if x == 6:
             return self.signal_azul.emit()
         
@@ -179,14 +182,15 @@ class SimonGameThread(QThread):
             return self.signal_apagado.emit()
         
         
-    finished = pyqtSignal()  # Señal que indica el final del juego
+    final_programa = pyqtSignal()  # Señal que indica el final del juego
     
     
-    def run(self):
+    def arranque_juego(self):
         
         if not hasattr(inspect, 'getargspec'):
             inspect.getargspec = inspect.getfullargspec
 
+        '''inicio del puerto y comunicacion'''
         board = pyfirmata.Arduino('COM5')
         it = pyfirmata.util.Iterator(board)
         it.start()
@@ -217,11 +221,15 @@ class SimonGameThread(QThread):
         buzzer = board.get_pin('d:10:p' )
 
         def pusheo():
+            """Sonido de indicacion al realizar pulsacion
+            """
             buzzer.write(1)
             time.sleep(1/10)
             buzzer.write(0)
 
         def bienvenida():
+            """Secuencia de inicio
+            """
             for i in range(8):
                 duracionNota = 1000/duracionNotas[i]
                 buzzer.write(1000/melodia_error[i])
@@ -231,6 +239,8 @@ class SimonGameThread(QThread):
                 time.sleep(pausaEntreNotas) 
 
         def error():
+            """Secuencia de error
+            """
             for i in range(8):
                 duracionNota = 1000/duracionNotas_2[i]
                 buzzer.write(1000/melodia_error[i])
@@ -240,6 +250,8 @@ class SimonGameThread(QThread):
                 time.sleep(pausaEntreNotas)
 
         def paso_nivel():
+            """Secuencia al pasar de nivel
+            """
             for i in range(4):
                 buzzer.write(1000/melodia_error[i])
                 time.sleep(1/10)
@@ -256,9 +268,10 @@ class SimonGameThread(QThread):
         combinaciones=[]
 
 
-        '''Secuencia de inicio'''
 
         def inicio():
+            """Secuencia de inicio
+            """
             print('Bienvenido \n Inicio')
 
             bienvenida()
@@ -267,15 +280,20 @@ class SimonGameThread(QThread):
                 time.sleep(1/10)
                 board.digital[i].write(0)
                 
-            #buz.melodia_bienvenida()
 
-        '''Generar secuencia aleatoria'''
         def generar():
+            """Generar secuencia aleatoria
+
+            Returns:
+                list: returna una lista con el numero(s) generados aleaotorios
+            """
             x= rand.randint(6,9)
             combinaciones.append(x)
             return combinaciones
 
         def mostrar():
+            """Muestra las secuencias generadas aleatoriamente
+            """
             secuencia=generar()
             for i in secuencia:
                 board.digital[i].write(1)
@@ -287,7 +305,8 @@ class SimonGameThread(QThread):
 
 
             '''Principal -Loop-'''
-        while True:            
+        while True:
+                       
             if niveles == 0:
                 inicio()
                 niveles+=1
@@ -306,16 +325,13 @@ class SimonGameThread(QThread):
                             
                         if boton1 == 1 :
                             pusheo()
-                            print('bton 1')
                             azul.write(1)
                             self.signals(6)
-                            time.sleep(1)
+                            time.sleep(1/2)
                             azul.write(0)
                             self.signals(0)
                             estado=6
-                            print(6)
-                            pos_orden+=1
-                                    
+                            pos_orden+=1       
                             break
                                 
                         elif boton2 == 1:
@@ -376,7 +392,7 @@ class SimonGameThread(QThread):
                     break
 
 
-        self.finished.emit()
+        self.final_programa.emit()
         
 
 
