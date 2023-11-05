@@ -48,17 +48,17 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
         self.Regresarbtn.clicked.connect(self.regresar)
         self.iniciobtn.clicked.connect(self.inicio_juego)
         
-        '''Conexion de el hilo JuegoSimon'''
+        # * Conexion con el hilo secundario (JuegoSimon)
         self.juegosimon_hilo=JuegoSimon(self) #Instancia
         
-        '''Implementacion de slots para la comunicacion con el hilo externo'''
+        # * Implementacion de slots para la comunicacion con el hilo externo
         self.juegosimon_hilo.signal_azul.connect(self.azul)
         self.juegosimon_hilo.signal_rojo.connect(self.rojo)
         self.juegosimon_hilo.signal_verde.connect(self.verde)
         self.juegosimon_hilo.signal_amarillo.connect(self.amarillo)
         self.juegosimon_hilo.signal_apagado.connect(self.apagado)
         
-        '''Final del juego asociado al metodo final_juego'''
+        # *Final del juego asociado al metodo final_juego
         self.juegosimon_hilo.final_programa.connect(self.final_juego)  #Conexion con el final del juego
 
       
@@ -118,14 +118,14 @@ class MainWindow(QMainWindow, Ui_MainWindow,):
         
     def inicio_juego(self):
         """Inica el hilo secundario (JUEGO)"""
-        self.juegosimon_hilo.start()  # Iniciar el hilo del juego
+        self.juegosimon_hilo.start()  # * Iniciar el hilo del juego
     
     
     def final_juego(self):
         """Indica el final del juego mostrando en pantalla el final del juego
         """
-        print("El juego ha terminado, lo siento")  # Mensaje después de que el juego ha finalizado
-        '''Termina el juego y cierra la insterfaz'''
+        print("El juego ha terminado, lo siento")  # * Mensaje después de que el juego ha finalizado
+        # * Termina el juego y cierra la insterfaz'''
         exit()
         
 
@@ -147,7 +147,7 @@ class JuegoSimon(QThread):
         super().__init__()
         self.main_window = main_window_instance
         
-    '''Inicilizar signals'''    
+    # * Inicilizar signals
     signal_azul = pyqtSignal()
     signal_rojo = pyqtSignal()
     signal_verde = pyqtSignal()
@@ -180,7 +180,7 @@ class JuegoSimon(QThread):
             return self.signal_apagado.emit()
         
         
-    final_programa = pyqtSignal()  # Señal que indica el final del juego
+    final_programa = pyqtSignal()  # * Señal que indica el final del juego
     
     
     def run(self):
@@ -202,20 +202,20 @@ class JuegoSimon(QThread):
         duracionNotas = [4000, 8000, 8000, 4000, 4000, 4000, 4000, 4000]
         duracionNotas_2 = [3000, 7000, 3000, 5000, 3000, 2000, 9000, 2000]
 
-        '''Botones'''
+        # *Pin correspondiente a cada boton conectado en el arduino'''
         bt1 = board.get_pin('d:2:i' )
         bt2 = board.get_pin('d:3:i' )
         bt3 = board.get_pin('d:4:i' )
         bt4 = board.get_pin('d:5:i' )
 
-        '''LEDS'''
+        # *Pin correspondiente a cada led conectado en el arduino'''
         
         azul = board.get_pin('d:6:o')
         rojo = board.get_pin('d:7:o')
         verde = board.get_pin('d:8:o')
         amarillo= board.get_pin('d:9:o')
 
-        '''Buzzer y melodias'''
+        # * Conexion al pin del arduino con el buzzer'''
         buzzer = board.get_pin('d:10:p' )
 
         def pusheo():
