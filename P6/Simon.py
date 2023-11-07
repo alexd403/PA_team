@@ -11,7 +11,7 @@ import time
 import inspect
 import random as rand
 
- 
+ #Esta es una modificacion desde github:)
 
         
 class Principal(QMainWindow, Ui_PrincipalSimon):
