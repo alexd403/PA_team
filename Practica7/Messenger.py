@@ -24,7 +24,7 @@ class Menu(QMainWindow, Ui_Menu):
         usuario=self.usuario_txe.toPlainText()
         contra=self.contra_txe.toPlainText()
 
-        if usuario=="usuario" and contra=="contrasena":
+        if usuario=="usuario123" and contra=="contrasena":
             print("Acceso")
             self.chat.show()
             self.close()
