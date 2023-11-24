@@ -1,5 +1,6 @@
 from Ui_Menu import *
 from Ui_Registro import *
+from Ui_chat import *
 from PyQt6.QtWidgets import QMainWindow, QMessageBox
 from PyQt6 import QtWidgets,  QtGui
 from PyQt6.QtCore import *
@@ -13,7 +14,7 @@ class Menu(QMainWindow, Ui_Menu):
         super().__init__(*parent, **flags)
         self.setupUi(self)
 
-        #self.chat=()
+        self.chat=Chat()
         self.regis=Registro()
 
         self.ingresar_btn.clicked.connect(self.ingreso)
@@ -25,7 +26,7 @@ class Menu(QMainWindow, Ui_Menu):
 
         if usuario=="usuario" and contra=="contrasena":
             print("Acceso")
-        #     self.chat.show()
+            self.chat.show()
             self.close()
         else:
             self.incorrecto()
@@ -70,6 +71,11 @@ class Registro(QMainWindow, Ui_Registro):
         imagen = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format.Format_RGB888)
         imagen = imagen.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio)
         self.imagen_lbl.setPixmap(QtGui.QPixmap.fromImage(imagen))
+    
+class Chat(QMainWindow, Ui_Chat):
+    def __init__(self, *parent, **flags) -> None:
+        super().__init__(*parent, **flags)
+        self.setupUi(self)
 
 
 if __name__ == "__main__":
