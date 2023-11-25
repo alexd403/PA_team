@@ -22,7 +22,9 @@ class Menu(QMainWindow, Ui_Menu):
         
     def ingreso(self):
         usuario=self.usuario_txe.toPlainText()
-        contra=self.contra_txe.toPlainText()
+        contra=self.contra_txe.text()
+        ip=self.ip_txe.toPlainText()
+        port=self.port_txe.toPlainText()
 
         if usuario=="usuario123" and contra=="contrasena":
             print("Acceso")
@@ -53,8 +55,6 @@ class Registro(QMainWindow, Ui_Registro):
         self.imagen_btn.clicked.connect(self.cargarImagen)
 
     def registo(self):
-        ip=self.ip_txe.toPlainText()
-        port=self.port_txe.toPlainText()
         correo=self.correo_txe.toPlainText()
         usuario=self.usue_txe.toPlainText()
         contra=self.contras_txe.toPlainText()

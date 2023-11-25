@@ -34,19 +34,6 @@
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="contra_txe">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>250</y>
-      <width>251</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="ingresar_btn">
     <property name="geometry">
      <rect>
@@ -184,6 +171,22 @@
     </property>
     <property name="text">
      <string>PORT:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="contra_txe">
+    <property name="geometry">
+     <rect>
+      <x>102</x>
+      <y>250</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
   </widget>
