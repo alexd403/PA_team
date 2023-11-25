@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtGui import QImage
 import cv2
 import sys
+ 
 
 class Menu(QMainWindow, Ui_Menu):
     def __init__(self, *parent, **flags) -> None:
