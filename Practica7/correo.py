@@ -4,15 +4,22 @@ import smtplib #Manda el mensaje
 
 
 # * Variables de entorno
-def send_email(correo):
+def send_email(correo, usuario):
     server = "servermexicoupiitos@gmail.com"
     password = "legy sxcx mjip xphi"
     
     receptor = correo
 
-    asunto = "Bienvenido a Mesenger Upiitos"
-    cuerpo = """
-    Te has registrado en Upiitos.
+    asunto = "Server UPIITOS"
+    cuerpo = f"""
+    Bienvenido a Mesenger Upiitos @{usuario}.
+    Tu registro ha sido exitoso, es hora de comenzar para platicar
+    con tus amigos.
+    
+    Si tu no realizaste este registro favor de notificarno lo antes posible.
+    
+    Saludos.
+    
     """
     em = EmailMessage()
     em['From'] = server

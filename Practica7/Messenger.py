@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtGui import QImage
 import cv2
 import sys
+import correo 
  
 
 class Menu(QMainWindow, Ui_Menu):
@@ -54,18 +55,20 @@ class Registro(QMainWindow, Ui_Registro):
         self.imagen_btn.clicked.connect(self.cargarImagen)
 
     def registo(self):
-        ip=self.ip_txe.toPlainText()
-        port=self.port_txe.toPlainText()
-        correo=self.correo_txe.toPlainText()
+        email=self.correo_txe.toPlainText()
         usuario=self.usue_txe.toPlainText()
         contra=self.contras_txe.toPlainText()
+        correo.send_email(email,usuario)
         self.close()
 
     def cargarImagen(self):
-        global filename
-        filename = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
-        imagen = cv2.imread(filename)
-        self.setPhoto(imagen)
+        try:
+            global filename
+            filename = QFileDialog.getOpenFileName(filter="Image (*.*)")[0]
+            imagen = cv2.imread(filename)
+            self.setPhoto(imagen)
+        except:
+            pass
 
     def setPhoto(self,image):
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
