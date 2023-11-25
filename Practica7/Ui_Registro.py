@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\sergi\OneDrive\Documentos\UPIITA\4 Semestre\Programacion Avanzada\PA_team\Practica7\Registro.ui'
+# Form implementation generated from reading ui file 'c:\Users\aleva\OneDrive - Instituto Politecnico Nacional\Desktop\Documentos\PA_team\Practica7\Registro.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -14,7 +14,7 @@ class Ui_Registro(object):
         Registro.setObjectName("Registro")
         Registro.resize(469, 448)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\PA_team\\Practica7\\logo_msn.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\PA_team\\Practica7\\logo_msn.jpeg"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Registro.setWindowIcon(icon)
         Registro.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(125, 154, 255, 255), stop:1 rgba(255, 255, 255, 255));")
         self.centralwidget = QtWidgets.QWidget(parent=Registro)
