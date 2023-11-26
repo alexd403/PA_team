@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtGui import QImage
 import cv2
 import sys
+import db
 import correo 
  
 
@@ -23,15 +24,19 @@ class Menu(QMainWindow, Ui_Menu):
         self.cuenta_btn.clicked.connect(self.registro)
         
     def ingreso(self):
-        usuario=self.usuario_txe.toPlainText()
-        contra=self.contra_txe.text()
+        user=self.usuario_txe.toPlainText()
+        password=self.contra_txe.text()
         ip=self.ip_txe.toPlainText()
         port=self.port_txe.toPlainText()
-
-        if usuario=="usuario123" and contra=="contrasena":
+        
+        x , y = db.find(user)
+        
+        print(x,y)
+        if user == x and password == y:
             print("Acceso")
             self.chat.show()
             self.close()
+            
         else:
             self.incorrecto()
     
@@ -58,9 +63,19 @@ class Registro(QMainWindow, Ui_Registro):
 
     def registo(self):
         email=self.correo_txe.toPlainText()
-        usuario=self.usue_txe.toPlainText()
-        contra=self.contras_txe.toPlainText()
-        correo.send_email(email,usuario)
+        user=self.usue_txe.toPlainText()
+        password=self.contras_txe.toPlainText()
+        
+        x , y = db.find(user)
+        
+        if x and y == 1:
+            
+            db.database(user, email, password)
+            correo.send_email(email,user)
+            
+        else:
+            self.incorrecto()
+            
         self.close()
 
     def cargarImagen(self):
@@ -71,6 +86,14 @@ class Registro(QMainWindow, Ui_Registro):
             self.setPhoto(imagen)
         except:
             pass
+    def incorrecto(self):
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Usuario ya registrado")
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Inicia sesion con tu nombre de usuario")
+        msg.setInformativeText("Si olvidaste tu contraseña, contactenos a servermexicoupiitos@gmail.com.")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
 
     def setPhoto(self,image):
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
