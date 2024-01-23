@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\sergi\OneDrive\Documentos\UPIITA\4 Semestre\Programacion Avanzada\Practica7\chat.ui'
+# Form implementation generated from reading ui file 'c:\Users\aleva\OneDrive - Instituto Politecnico Nacional\Desktop\Documentos\PA_team\Practica7\chat.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -12,67 +12,40 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Chat(object):
     def setupUi(self, Chat):
         Chat.setObjectName("Chat")
-        Chat.resize(1019, 550)
-        Chat.setStyleSheet("background-color: rgb(189, 236, 255);")
+        Chat.resize(1036, 557)
+        Chat.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(125, 154, 255, 255), stop:1 rgba(255, 255, 255, 255));")
         self.centralwidget = QtWidgets.QWidget(parent=Chat)
         self.centralwidget.setObjectName("centralwidget")
-        self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(780, 100, 211, 361))
-        self.lineEdit_2.setStyleSheet("border-color: rgb(204, 4, 4);\n"
-"background-color: rgb(230, 230, 230);")
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.label = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(830, 50, 131, 41))
-        self.label.setStyleSheet("\n"
+        self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(50, 10, 151, 51))
+        self.label_2.setStyleSheet("border-image: url(:/cct/Practica7/2015_MSN_logo.svg.png);")
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("c:\\Users\\aleva\\OneDrive - Instituto Politecnico Nacional\\Desktop\\Documentos\\PA_team\\Practica7\\../../PRACTICA7 MESSENGER/2015_MSN_logo.svg.png"))
+        self.label_2.setScaledContents(True)
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(830, 60, 131, 41))
+        self.label_3.setStyleSheet("\n"
 "font: 18pt \"MV Boli\";")
-        self.label.setObjectName("label")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(parent=self.centralwidget)
-        self.textBrowser_2.setEnabled(True)
-        self.textBrowser_2.setGeometry(QtCore.QRect(40, 100, 621, 201))
-        self.textBrowser_2.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.CursorShape.IBeamCursor))
-        self.textBrowser_2.setStyleSheet("background-color: rgb(222, 222, 222);")
-        self.textBrowser_2.setFrameShape(QtWidgets.QFrame.Shape.Box)
-        self.textBrowser_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.textBrowser_2.setReadOnly(False)
-        self.textBrowser_2.setOpenExternalLinks(True)
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.groupBox_2 = QtWidgets.QGroupBox(parent=self.centralwidget)
-        self.groupBox_2.setGeometry(QtCore.QRect(40, 320, 621, 181))
-        self.groupBox_2.setStyleSheet("background-color: rgb(176, 233, 255);")
-        self.groupBox_2.setTitle("")
-        self.groupBox_2.setObjectName("groupBox_2")
-        self.Insertar_Texto = QtWidgets.QTextBrowser(parent=self.groupBox_2)
-        self.Insertar_Texto.setGeometry(QtCore.QRect(20, 50, 581, 101))
-        self.Insertar_Texto.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.CursorShape.IBeamCursor))
-        self.Insertar_Texto.setStyleSheet("background-color: rgb(229, 229, 229);")
-        self.Insertar_Texto.setReadOnly(False)
-        self.Insertar_Texto.setOverwriteMode(True)
-        self.Insertar_Texto.setCursorWidth(2)
-        self.Insertar_Texto.setProperty("tabStopWidth", 80)
-        self.Insertar_Texto.setObjectName("Insertar_Texto")
-        self.adjuntar_btn = QtWidgets.QPushButton(parent=self.groupBox_2)
-        self.adjuntar_btn.setGeometry(QtCore.QRect(560, 10, 41, 31))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.adjuntar_btn.sizePolicy().hasHeightForWidth())
-        self.adjuntar_btn.setSizePolicy(sizePolicy)
-        self.adjuntar_btn.setStyleSheet("background-color: rgb(216, 216, 216);\n"
-"")
-        self.adjuntar_btn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica7\\../../../../../../../Administrador/Downloads/adjunto-archivo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.adjuntar_btn.setIcon(icon)
-        self.adjuntar_btn.setIconSize(QtCore.QSize(30, 30))
-        self.adjuntar_btn.setAutoRepeat(False)
-        self.adjuntar_btn.setAutoExclusive(False)
-        self.adjuntar_btn.setAutoDefault(False)
-        self.adjuntar_btn.setDefault(False)
-        self.adjuntar_btn.setFlat(True)
-        self.adjuntar_btn.setObjectName("adjuntar_btn")
-        self.Enviar_btn = QtWidgets.QPushButton(parent=self.groupBox_2)
-        self.Enviar_btn.setGeometry(QtCore.QRect(520, 60, 71, 71))
+        self.label_3.setObjectName("label_3")
+        self.listWidget = QtWidgets.QListWidget(parent=self.centralwidget)
+        self.listWidget.setGeometry(QtCore.QRect(740, 130, 256, 171))
+        self.listWidget.setObjectName("listWidget")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        self.label_4 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(270, 40, 131, 41))
+        self.label_4.setStyleSheet("\n"
+"font: 18pt \"MV Boli\";")
+        self.label_4.setObjectName("label_4")
+        self.img_lbl = QtWidgets.QLabel(parent=self.centralwidget)
+        self.img_lbl.setGeometry(QtCore.QRect(770, 330, 191, 151))
+        self.img_lbl.setText("")
+        self.img_lbl.setObjectName("img_lbl")
+        self.Enviar_btn = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.Enviar_btn.setGeometry(QtCore.QRect(580, 350, 81, 101))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -80,15 +53,18 @@ class Ui_Chat(object):
         self.Enviar_btn.setSizePolicy(sizePolicy)
         self.Enviar_btn.setStyleSheet("background-color: rgb(223, 223, 223);")
         self.Enviar_btn.setObjectName("Enviar_btn")
-        self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(50, 20, 131, 41))
-        self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("c:\\Users\\sergi\\OneDrive\\Documentos\\UPIITA\\4 Semestre\\Programacion Avanzada\\Practica7\\../../PRACTICA7 MESSENGER/2015_MSN_logo.svg.png"))
-        self.label_2.setScaledContents(True)
-        self.label_2.setObjectName("label_2")
+        self.Insertar_Texto1 = QtWidgets.QTextEdit(parent=self.centralwidget)
+        self.Insertar_Texto1.setGeometry(QtCore.QRect(40, 350, 531, 101))
+        self.Insertar_Texto1.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.CursorShape.SizeVerCursor))
+        self.Insertar_Texto1.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Insertar_Texto1.setObjectName("Insertar_Texto1")
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(parent=self.centralwidget)
+        self.plainTextEdit.setGeometry(QtCore.QRect(40, 110, 531, 221))
+        self.plainTextEdit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(255, 255, 255, 255));")
+        self.plainTextEdit.setObjectName("plainTextEdit")
         Chat.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=Chat)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1019, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1036, 22))
         self.menubar.setObjectName("menubar")
         Chat.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=Chat)
@@ -101,21 +77,21 @@ class Ui_Chat(object):
     def retranslateUi(self, Chat):
         _translate = QtCore.QCoreApplication.translate
         Chat.setWindowTitle(_translate("Chat", "MainWindow"))
-        self.label.setText(_translate("Chat", "En linea"))
-        self.textBrowser_2.setHtml(_translate("Chat", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
-        self.Insertar_Texto.setHtml(_translate("Chat", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
+        self.label_3.setText(_translate("Chat", "Chat"))
+        __sortingEnabled = self.listWidget.isSortingEnabled()
+        self.listWidget.setSortingEnabled(False)
+        item = self.listWidget.item(0)
+        item.setText(_translate("Chat", "Prueba"))
+        item = self.listWidget.item(1)
+        item.setText(_translate("Chat", "Prueba2"))
+        self.listWidget.setSortingEnabled(__sortingEnabled)
+        self.label_4.setText(_translate("Chat", "..."))
         self.Enviar_btn.setText(_translate("Chat", "ENVIAR"))
+        self.Insertar_Texto1.setHtml(_translate("Chat", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Shell Dlg 2\'; font-size:7.8pt;\"><br /></p></body></html>"))
