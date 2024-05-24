@@ -1,84 +1,55 @@
- # * Librerias esenciales para el uso de las comunicaciones tpc
 import socket
-# * El uso de la libreria (threading) permite el uso de hilos que se ejecutan en paralelo
 import threading
 
-host = '127.0.0.1' # !localhost- Donde se ecuntra el loopback
-port = 5003# ! Puerto el cual se establecera la comunicacion /5003
-
-# ? Creacion del socket que se encargara de establecer la comunicacion
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-'''
-# * AF_INET: Indica que se hara uso de un socket de tipo internet
-# * SOCK_STREAM: Indica comunicacion TCP 
-'''
-# Pase los datos de coneccion al socket 
-server.bind((host, port))
-
-# * Escucha a las conexiones.
-server.listen()
-print(f"Server is running on {host} : {port} ")
-
-# * En el programa se podran conectar varios usuarios
-clients= []
-users= []
-
-def broadcast(mensaje, _client): #Encargado de hacer llegar los mensajes a cada usuario conectado
-    #Enviamos el mensaje a todos los usuarios menos al que lo emitio
-    print('He llegado a la emision')
-    for client in clients:
-        try:
-            if client != _client:
-                client.send(mensaje)
-        except:
-            pass
-            
-
-
-def handle_messages(client): #Encargado de hacer el manejo de mensajes
+def clientthread(conn, addr):
+    conn.send(bytes(f"Bienvenido {addr}\n", 'utf-8'))
     while True:
         try:
-            #Recive mensajes con una cantidad maxima de 1024 bytes
-            mensaje = client.recv(1024)
-            broadcast(mensaje, client)
-        except:
-            #En caso de que ocurra un error mandamos el siguiente mensaje
-            print ('Error')
-            pos = clients.index(client)
-            username = users[pos]
-            #Para mander mensajes necesitamos hacer una codificacion utf-8 para convertir 
-            #los strings en bytes
-            broadcast(f'Chatbot: {username} disconnected'.encode('utf-8'), client)
-            clients.remove(client)
-            users.remove(username)
-            print ('Client removed')
-            server.close()
-            break
-        
-def recive_connections():
-    while True:
-        try:
-            client, address =server.accept() #* Esta funcion me retorna dos valores que son la ip y el port
-            client.send(f'@username:'.encode('utf-8'))
-            user= client.recv(1024).decode('utf-8')
+            message = conn.recv(BUFFER_SIZE)
+            if message:
+                print(f"<{addr[0]}> {message}")
+                # Reenviamos el mensaje recibido a todos los demás clientes.
+                message_to_send = f"<{addr[0]}> {message.decode('utf-8')}\n"
+                broadcast(message_to_send, conn)
+            else:
+                remove(conn)
         except:
             break
-        
-        #! Agregamos el cliente y el nombre de usuario que se vayan conectando
-        clients.append(client)
-        users.append(user)
-        
-        print(f'User: {user} is connected with address: {str(address)}')
-        
-        #* Mensaje dirigido a todos los clientes que se encuntren conectados.
-        mensaje= f'{user} is connected'.encode('utf-8')
-        broadcast(mensaje, client)
-        
-        #! Mensaje dirigido al usuario conectado
-        client.send('You are connected'.encode('utf-8'))
-      
-        #! Creacion de los hilos paralelos
-        thread = threading.Thread(target=handle_messages, args=(client,)).start()
 
-recive_connections()
+def broadcast(message, connection):
+    for clients in list_of_clients:
+        if clients != connection:
+            try:
+                clients.send(bytes(message, 'utf-8'))
+            except:
+                clients.close()
+                remove(clients)
+
+def remove(connection):
+    if connection in list_of_clients:
+        list_of_clients.remove(connection)
+
+if __name__ == "__main__":
+    host = '127.0.0.1' # Esta función nos da el nombre de la máquina
+    port = 5003
+    BUFFER_SIZE = 1024  # Usamos un número pequeño para tener una respuesta rápida
+    # Creamos un socket TCP
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server.bind((host, port))
+    server.listen(100)  # Escuchamos hasta 100 clientes
+    list_of_clients = []  # Lista de clientes conectados
+    print(f"Escuchando conexiones en: {(host, port)}")
+    try:
+        while True:
+            conn, addr = server.accept()
+            list_of_clients.append(conn)  # Agregamos a la lista de clientes
+            print(f"Cliente conectado: {addr}")
+            # Creamos y ejecutamos el hilo para atender al cliente
+            threading.Thread(target=clientthread, args=(conn, addr)).start()
+    except KeyboardInterrupt:
+        print("Caught keyboard interrupt, exiting")
+    finally:
+        conn.close()
+        server.close()   
+    print("Conexión terminada.")
