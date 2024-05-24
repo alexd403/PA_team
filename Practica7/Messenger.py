@@ -45,38 +45,107 @@ class ThreadSocket(QThread):
         global connected
         connected = False
         self.wait()
+class Chat(QMainWindow, Ui_Chat, QThread):
+    
+    
+    
+    def __init__(self) -> None:
         
+        super().__init__()
+        self.setupUi(self)
+        self.coneccion = None
+        # Conexion con funciones al oprimir los botones
+        self.Enviar_btn.clicked.connect(self.Enviar)
+        #self.listWidget.currentItemChanged.connect(self.actualizarLabel)#Conexion del widget de lista 
+        #self.listWidget.itemClicked.connect(self.reiniciarArchivo)      
+        
+    # def actualizarLabel(self):
+    #     # Obtener el texto del elemento seleccionado
+    #     texto_seleccionado = self.listWidget.currentItem().text()
+    #     # Mostrar el texto en el QLabel
+    #     self.label_4.setText(f" {texto_seleccionado}")
+    #     ##
+    # #def reiniciarArchivo(self):#Funcion de prueba
+       # open("Dialogo.txt", "w")
+
+    def Enviar(self):
+        #Mensaje que debe de llegar la clase S
+        dialogo=self.Insertar_Texto1.toPlainText()
+    
+        print(dialogo)
+        
+        if dialogo != "" and connected:
+            server.send(bytes(dialogo, 'utf-8'))
+            self.Insertar_Texto1.clear()
+            self.mensage_entrante("<Tú> " + dialogo + '\n')
+        
+                
+    #def reset_txt(self):#Presuntamente se encarga de reiniciar el txt cada que se seleccione a una nueva persona en el chat 
+        #pass
+    
+                
+    def mensage_entrante(self, mensaje):
+        self.plainTextEdit.setPlainText(self.plainTextEdit.toPlainText() + mensaje)
+    
+    def setPhoto(self, img_user):
+        image = db.busqueda_img(img_user)
+        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        imagen = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format.Format_RGB888)
+        imagen = imagen.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio)
+        self.img_lbl.setPixmap(QtGui.QPixmap.fromImage(imagen))
+
+
+    
 class Menu(QMainWindow, Ui_Menu):
+    signal_mensaje = pyqtSignal(str)
     def __init__(self, *parent, **flags) -> None:
         super().__init__(*parent, **flags)
         self.setupUi(self)
-    
+        self.user=""
+        self.password=""
+        self.ip=""
+        self.port=""
         
         self.regis=Registro()
-        self.chat=Chat()
-        
+        self.chatp=Chat()
         
         self.ingresar_btn.clicked.connect(self.ingreso)
+        self.ingresar_btn.clicked.connect(self.showDialog)
         self.cuenta_btn.clicked.connect(self.registro)
-        
+    
+       
     def ingreso(self):
-        user=self.usuario_txe.toPlainText()
-        password=self.contra_txe.text()
-        ip=self.ip_txe.toPlainText()
-        port=self.port_txe.toPlainText()
+        self.user=self.usuario_txe.toPlainText()
+        self.password=self.contra_txe.text()
+        self.ip=self.ip_txe.toPlainText()
+        self.port=self.port_txe.toPlainText()
         
-        x , y = db.find(user)
+        x , y = db.find(self.user)
         
         print(x,y)
-        if user == x and password == y:
+        if self.user == x and self.password == y:
             print("Acceso")
-            self.chat.show()
-            #self.servidor.run(user,ip,port)
-            self.chat.setPhoto(user)
+            self.chatp.show()
+            self.chatp.setPhoto(self.user)
             self.close()
+            self.coneccion = ThreadSocket(self.ip, int(self.port))
+            self.coneccion.signal_message.connect(self.mensage_entrante)
+            self.coneccion.start()
             
         else:
             self.incorrecto()
+            
+    def showDialog(self):
+        
+        print(self.ip, self.user, self.port)
+            
+        if self.ip and not self.ip.isspace() and self.port and self.port.isnumeric():
+            #self.coneccion = ThreadSocket(self.ip, int(self.port))
+            self.coneccion.signal_message.connect(self.mensage_entrante)
+            
+    def mensage_entrante(self, mensaje):
+        #self.chatp.self.chat.setPlainText(self.chatp.self.chat.toPlainText() + mensaje)
+        pass
     
     def incorrecto(self):
         msg = QMessageBox(self)
@@ -99,7 +168,7 @@ class Registro(QMainWindow, Ui_Registro):
         self.imagen = None
         self.registrar_btn.clicked.connect(self.registo)
         self.imagen_btn.clicked.connect(self.cargarImagen)
-
+        #self.label_4.setText("Conectado")
    
     
     def registo(self):
@@ -113,7 +182,7 @@ class Registro(QMainWindow, Ui_Registro):
         if x and y == 1:
                 
             db.database(self.user, email, password)
-            #correo.send_email(email,self.user)
+            correo.send_email(email,self.user)
             imagen_usuario= self.imagen
             # ! Corregir a la hora de no subir imagen
             try:
@@ -156,69 +225,7 @@ class Registro(QMainWindow, Ui_Registro):
    
     
 
-class Chat(QMainWindow, Ui_Chat, QThread):
-    
-    
-    
-    def __init__(self) -> None:
-        
-        super().__init__()
-        self.setupUi(self)
 
-        self.coneccion = None
-        # Conexion con funciones al oprimir los botones
-        self.Enviar_btn.clicked.connect(self.Enviar)
-        #self.listWidget.currentItemChanged.connect(self.actualizarLabel)#Conexion del widget de lista 
-        #self.listWidget.itemClicked.connect(self.reiniciarArchivo)      
-        
-    # def actualizarLabel(self):
-    #     # Obtener el texto del elemento seleccionado
-    #     texto_seleccionado = self.listWidget.currentItem().text()
-    #     # Mostrar el texto en el QLabel
-    #     self.label_4.setText(f" {texto_seleccionado}")
-    #     ##
-    # #def reiniciarArchivo(self):#Funcion de prueba
-       # open("Dialogo.txt", "w")
-
-    def Enviar(self):
-        #Mensaje que debe de llegar la clase S
-        dialogo=self.Insertar_Texto1.toPlainText()
-    
-        print(dialogo)
-        
-        if dialogo != "" and connected:
-            server.send(bytes(str, 'utf-8'))
-            self.Insertar_Texto1.clear()
-            self.mensage_entrante("<Tú> " + str + '\n')
-        
-                
-    #def reset_txt(self):#Presuntamente se encarga de reiniciar el txt cada que se seleccione a una nueva persona en el chat 
-        #pass
-    def showDialog(self):
-        dialog = Menu()
-        resp = dialog.exec()
-        if resp == 1:
-            
-            server = dialog.ip_txe.toPlainText()
-            user = dialog.usuario_txe.toPlainText()
-            port = dialog.port_txe.toPlainText()
-            if server and not server.isspace() and port and port.isnumeric():
-                self.coneccion = ThreadSocket(server, int(port))
-                self.coneccion.signal_message.connect(self.mensage_entrante)
-                self.coneccion.start()
-                
-    def mensage_entrante(self, mensaje):
-        self.plainTextEdit.setPlainText(self.plainTextEdit.toPlainText() + mensaje)
-    
-    def setPhoto(self, img_user):
-        image = db.busqueda_img(img_user)
-        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        imagen = QImage(frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format.Format_RGB888)
-        imagen = imagen.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio)
-        self.img_lbl.setPixmap(QtGui.QPixmap.fromImage(imagen))
-
-
-    
 
 
     

@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Chat(object):
     def setupUi(self, Chat):
         Chat.setObjectName("Chat")
-        Chat.resize(1036, 557)
+        Chat.resize(1022, 557)
         Chat.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(125, 154, 255, 255), stop:1 rgba(255, 255, 255, 255));")
         self.centralwidget = QtWidgets.QWidget(parent=Chat)
         self.centralwidget.setObjectName("centralwidget")
@@ -36,7 +36,7 @@ class Ui_Chat(object):
         item = QtWidgets.QListWidgetItem()
         self.listWidget.addItem(item)
         self.label_4 = QtWidgets.QLabel(parent=self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(270, 40, 131, 41))
+        self.label_4.setGeometry(QtCore.QRect(270, 40, 161, 41))
         self.label_4.setStyleSheet("\n"
 "font: 18pt \"MV Boli\";")
         self.label_4.setObjectName("label_4")
@@ -64,7 +64,7 @@ class Ui_Chat(object):
         self.plainTextEdit.setObjectName("plainTextEdit")
         Chat.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=Chat)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1036, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1022, 22))
         self.menubar.setObjectName("menubar")
         Chat.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=Chat)
@@ -85,7 +85,7 @@ class Ui_Chat(object):
         item = self.listWidget.item(1)
         item.setText(_translate("Chat", "Prueba2"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
-        self.label_4.setText(_translate("Chat", "..."))
+        self.label_4.setText(_translate("Chat", "CONECTADO"))
         self.Enviar_btn.setText(_translate("Chat", "ENVIAR"))
         self.Insertar_Texto1.setHtml(_translate("Chat", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
